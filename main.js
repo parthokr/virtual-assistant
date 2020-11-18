@@ -13,7 +13,7 @@ function createWindow() {
   });
   const pageToload = userData["loggedIn"] ? "app.html" : "index.html";
   mainWindow.loadFile(pageToload);
-  mainWindow.webContents.openDevTools();
+//   mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
