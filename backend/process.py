@@ -14,7 +14,7 @@ def listen():
             text = r.recognize_google(audio)
             text = text.lower()
             json_res = {"text": text, "assistant_reply": commands.get(text, "Not found")[0]}
-            commands.get(text)[1]()
+            commands.get(text)[1]() # calling function to execute corresponding command
             print(json.dumps(json_res))
         except:
             print("Error")
