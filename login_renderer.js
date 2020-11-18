@@ -27,6 +27,7 @@ const login = () => {
         if(response["logged_in"])
         {
             ipcRenderer.send("asynchronous-message", "successfullyLoggedin");
+            updateUserData("loggedIn", true);
         }
         if(response["error"]==="auth_error")
         {
