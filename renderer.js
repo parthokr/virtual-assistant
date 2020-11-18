@@ -33,7 +33,12 @@ const signup = () => {
     );
     python.stdout.on("data", function (data) {
         console.log("Python response: ", data.toString("utf8"));
-        console.log(JSON.parse(data.toString()));
+        const response = JSON.parse(data.toString());
+        console.log(response);
+        if(response["signed_up"])
+        {
+            ipcRenderer.send("asynchronous-message", "successfullySignedup");
+        }
         // result.textContent = data.toString("utf8");
     });
 
