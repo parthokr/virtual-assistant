@@ -22,7 +22,19 @@ const login = () => {
     );
     python.stdout.on("data", function (data) {
     //   console.log("Python response: ", data.toString("utf8"));
-      console.log(JSON.parse(data.toString()));
+        const response = JSON.parse(data.toString());
+        console.log(response);
+        if(response["logged_in"])
+        {
+            ipcRenderer.send("asynchronous-message", "successfullyLoggedin");
+        }
+        if(response["error"]==="auth_error")
+        {
+            ipcRenderer.send("asynchronous-message", "wrongPassword");
+        }
+        if (response["error"] === "username_not_found") {
+          ipcRenderer.send("asynchronous-message", "wrongUsername");
+        }
       // result.textContent = data.toString("utf8");
     });
 
