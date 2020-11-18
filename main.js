@@ -1,5 +1,4 @@
 const { app, BrowserWindow, ipcMain, remote, dialog } = require("electron");
-const { options } = require("toastr");
 const {loadUserData} = require("./utils/userData");
 let mainWindow;
 function createWindow() {
@@ -7,13 +6,13 @@ function createWindow() {
     console.log(userData);
     mainWindow = new BrowserWindow({
     width: 800,
-    height: 400,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
     }
   });
-
-  mainWindow.loadFile("index.html");
+  const pageToload = userData["loggedIn"] ? "app.html" : "index.html";
+  mainWindow.loadFile(pageToload);
   mainWindow.webContents.openDevTools();
 }
 
@@ -46,7 +45,8 @@ ipcMain.on("asynchronous-message", (event, message) => {
     } else if(message === "successfullySignedup") {
         const res = dialog.showMessageBox(null, {title: "Success", message: "You have been signed up!"});
     } else if(message === "successfullyLoggedin") {
-         const res = dialog.showMessageBox(null, {title: "Success", message: "Logged in successfully"});
+        const res = dialog.showMessageBox(null, {title: "Success", message: "Logged in successfully"});
+        mainWindow.loadFile("app.html");
     } else if(message === "wrongPassword") {
          const res = dialog.showMessageBox(null, {title: "Error", message: "Incorrent password"});
     } else if(message === "wrongUsername") {
