@@ -11,5 +11,10 @@ if(__name__=="__main__"):
     elif(len(argv)>1):
         text = ' '.join(list(map(lambda chunk: chunk.lower(), argv[1:])))
         cmd_runner = CommandRunner(text)
-        print(json.dumps({"assistant_reply":cmd_runner.getAssistantReply()}))
+        print(json.dumps(
+            {
+            "assistant_reply": cmd_runner.getAssistantReply(),
+            "call_back": cmd_runner.getCallBackId()
+            }
+            ))
         cmd_runner.run()
