@@ -31,6 +31,25 @@ const addAssistantReply = (cmd) => {
     commandsCard.appendChild(newCmd);
     commandsCard.scrollTop =  commandsCard.scrollHeight;
 }
+
+const runCallBack = (id) => {
+  console.log(id);
+  let python = require("child_process").spawn("./backend/venv/Scripts/python", [
+    "./backend/run_callback.py",
+    id,
+  ]);
+  python.stdout.on("data", (data) => {
+    let res = JSON.parse(data.toString());
+    let reply = "";
+    i = 1;
+    for (datum of res["data"]) {
+      reply += `<b>Message ${i}</b>\n${datum} \n\n`;
+      i += 1;
+    }
+    addAssistantReply(reply);
+  });
+};
+
 mic.addEventListener("click", (event) => {
     console.log("Listening");
     let listeningAudio = new Audio("assets/audio/listening.mp3");
@@ -49,11 +68,15 @@ mic.addEventListener("click", (event) => {
         let res = JSON.parse(data.toString());
         let doneAudio = new Audio("assets/audio/done.mp3");
         doneAudio.play();
-        if (res["assistant_reply"] == "not_found") {
+        if (res["text"] == "not_found") {
           toastr.warning("Command not found");
         }else{
           addNewCommand(res["text"]);
           addAssistantReply(res["assistant_reply"]);
+          if(res["call_back"]>-1)
+          {
+            runCallBack(res["call_back"]);
+          }
         }
         const _mic = document.getElementById("_mic");
         if (_mic.classList.contains("fa-stop-circle")) {
@@ -84,6 +107,10 @@ const textCommand = (cmd) => {
         toastr.warning("Command not found");
       } else {
         addAssistantReply(res["assistant_reply"]);
+        if (res["call_back"] > -1) {
+          console.log("callback found!");
+          runCallBack(res["call_back"]);
+        }
       }
     });
 }
