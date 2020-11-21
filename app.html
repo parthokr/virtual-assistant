@@ -1,24 +1,20 @@
-
-<!------ Include the above in your HEAD tag ---------->
-
 <!DOCTYPE html>
 <html>
 
 <head>
-    <title>Chat</title>
+    <title>Voice Assistant</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 </head>
-<!--Coded With Love By Mutiullah Samim-->
 <style>
     	body,html{
 			height: 100%;
 			margin: 0;
-			background: #7F7FD5;
-	       background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
-	        background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+			background-color: #0062a8;
 		}
 
 		.chat{
@@ -27,8 +23,7 @@
 		}
 		.card{
 			height: 500px;
-			border-radius: 15px !important;
-			background-color: rgba(0,0,0,0.4) !important;
+			background-color:#0062a8;
 		}
 		.contacts_body{
 			padding:  0.75rem 0 !important;
@@ -65,6 +60,8 @@
 			color:white !important;
 			height: 60px !important;
 			overflow-y: auto;
+			padding-left: 2%;
+			padding-top: 2%;
 		}
 			.type_msg:focus{
 		     box-shadow:none !important;
@@ -91,18 +88,6 @@
 			color: white !important;
 			cursor: pointer;
 		}
-		.contacts{
-			list-style: none;
-			padding: 0;
-		}
-		.contacts li{
-			width: 100% !important;
-			padding: 5px 10px;
-			margin-bottom: 15px !important;
-		}
-	.active{
-			background-color: rgba(0,0,0,0.3);
-	}
 		.user_img{
 			height: 70px;
 			width: 70px;
@@ -134,9 +119,6 @@
 		right: 0.4em;
 		border:1.5px solid white;
 	}
-	.offline{
-		background-color: #c23616 !important;
-	}
 	.user_info{
 		margin-top: auto;
 		margin-bottom: auto;
@@ -150,16 +132,7 @@
 	font-size: 10px;
 	color: rgba(255,255,255,0.6);
 	}
-	.video_cam{
-		margin-left: 50px;
-		margin-top: 5px;
-	}
-	.video_cam span{
-		color: white;
-		font-size: 20px;
-		cursor: pointer;
-		margin-right: 20px;
-	}
+
 	.msg_cotainer{
 		margin-top: auto;
 		margin-bottom: auto;
@@ -238,7 +211,6 @@
 	}
 	}
 </style>
-
 <body>
     <div class="container-fluid h-100">
         <div class="row justify-content-center h-100">
@@ -256,15 +228,6 @@
                                 <!-- <p>1767 Messages</p> -->
                             </div>
                         </div>
-                        <!-- <span id="action_menu_btn"><i class="fas fa-ellipsis-v"></i></span>
-                        <div class="action_menu">
-                            <ul>
-                                <li><i class="fas fa-user-circle"></i> View profile</li>
-                                <li><i class="fas fa-users"></i> Add to close friends</li>
-                                <li><i class="fas fa-plus"></i> Add to group</li>
-                                <li><i class="fas fa-ban"></i> Block</li>
-                            </ul>
-                        </div> -->
                     </div>
                     <div id="commands" class="card-body msg_card_body">
                         <div class="d-flex justify-content-start mb-4">
@@ -274,75 +237,13 @@
                             </div>
                             <div class="msg_cotainer">
                                 Hi, how can I help you?
-                                <span class="msg_time">8:40 AM, Today</span>
                             </div>
                         </div>
-                        <!-- 
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                Hi Khalid i am good tnx how about you?
-                                <span class="msg_time_send">8:55 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src="assets/img/user.svg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                    class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am good too, thank you for your chat template
-                                <span class="msg_time">9:00 AM, Today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                You are welcome
-                                <span class="msg_time_send">9:05 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src=""
-                                    class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                    class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                I am looking for your next templates
-                                <span class="msg_time">9:07 AM, Today</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="msg_cotainer_send">
-                                Ok, thank you have a good day
-                                <span class="msg_time_send">9:10 AM, Today</span>
-                            </div>
-                            <div class="img_cont_msg">
-                                <img src=""
-                                    class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg"
-                                    class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="msg_cotainer">
-                                Bye, see you
-                                <span class="msg_time">9:12 AM, Today</span>
-                            </div>
-                        </div> -->
                     </div>
                     <div class="card-footer">
                         <div class="input-group">
-
-                            <textarea name="command" class="form-control type_msg"
-                                placeholder="Type your command..."></textarea>
+                            <input name="command" class="form-control type_msg"
+                                placeholder="Type your command...">
                             <div class="input-group-append">
                                 <span id="mic" class="input-group-text send_btn"><i id="_mic" class="fa fa-microphone" aria-hidden="true"></i></span>
                             </div>
