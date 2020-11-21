@@ -5,7 +5,8 @@ class Commands:
                 "open youtube": ["Opening youtube...", Actions.open_youtube, -1],
                 "open explorer": ["Opening explorer...", Actions.open_explorer, -1],
                 "open facebook": ["Opening facebook...", Actions.open_facebook, -1],
-                "recent unread messages": ["Checking messages...", lambda x: None, 0]
+                "messages": ["Checking messages...", lambda x: None, 0],
+                "my ip": ["Fetching your ip...", lambda x: None, 1]
             }
     def get_commands(self):
         return self.commands
