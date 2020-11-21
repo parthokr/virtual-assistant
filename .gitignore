@@ -256,5 +256,4 @@ dmypy.json
 cython_debug/
 
 *.pickle
-gmail.py
 credentials.json
