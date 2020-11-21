@@ -254,3 +254,7 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+*.pickle
+gmail.py
+credentials.json
