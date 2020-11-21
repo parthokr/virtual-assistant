@@ -3,6 +3,7 @@ import json
 import webbrowser
 def open_youtube():
     webbrowser.open("https://www.youtube.com")
+    
 commands = {
     "open youtube": ["Opening youtube...", open_youtube]
 }
@@ -17,6 +18,6 @@ def listen():
             commands.get(text)[1]() # calling function to execute corresponding command
             print(json.dumps(json_res))
         except:
-            print("Error")
+            print(json.dumps({"text": "error"}))
 
 listen()

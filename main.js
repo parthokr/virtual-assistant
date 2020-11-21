@@ -5,8 +5,8 @@ function createWindow() {
     const userData = loadUserData();
     console.log(userData);
     mainWindow = new BrowserWindow({
-    width: 800,
-    height: 800,
+    width: 600,
+    height: 600,
     webPreferences: {
       nodeIntegration: true,
     }
