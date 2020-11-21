@@ -16,6 +16,7 @@ class VoiceToText:
                 self.cmd_runner = CommandRunner(text)
                 self.res["text"] = text
                 self.res["assistant_reply"] = self.cmd_runner.getAssistantReply()
+                self.res["call_back"] = self.cmd_runner.getCallBackId()
                 # commands.get(text)[1]() # calling function to execute corresponding command
             except:
                 self.cmd_runner = CommandRunner("")
