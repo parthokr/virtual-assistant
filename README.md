@@ -11,6 +11,9 @@
 ``open explorer``
 > Open file explorer
 
+``open chrome``
+> Open chrome (if  installed on your system)
+
 ``open youtube``
 > Open youtube website with your default browser
 
