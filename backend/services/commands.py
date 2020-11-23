@@ -1,5 +1,13 @@
 from .actions import Actions
 class Commands:
+    """
+        This call contains a dictionary of commands 
+        which is looked for when a specific command is detected
+        and then corresponding action is executed from actions.py
+
+        if any command is queried which relates a non action method, i.e callback > -1
+        then run_callback.py is executed from root backend package
+    """
     def __init__(self):
         self.commands = {
                 "open youtube": ["Opening youtube...", Actions.open_youtube, -1],
