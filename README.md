@@ -19,3 +19,4 @@
 | ``my ip`` or ``ip``       |       Get your public ipv4 address                      |
 | ``covid update``          |       Get latest covid update for your locale           |
 | ``covid update global``   |       Get latest global covid update                    |
+
