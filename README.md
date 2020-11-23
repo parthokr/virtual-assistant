@@ -1,4 +1,4 @@
-## Avialable commands
+## Available commands
 
 ``open explorer``
 > Open file explorer
