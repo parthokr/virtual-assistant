@@ -8,6 +8,11 @@
     
 ## Available commands
 
+| Command           |                     Description                         |
+| ------------------|:-------------------------------------------------------:|
+| open explorer     |               Open file explorer                        |
+| ------------------|:-------------------------------------------------------:|
+
 ``open explorer``
 > Open file explorer
 
