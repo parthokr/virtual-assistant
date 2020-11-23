@@ -41,8 +41,10 @@ const runCallBack = (id) => {
   python.stdout.on("data", (data) => {
     let res = JSON.parse(data.toString());
     let reply = "";
-    for (datum of res["data"]) {
-      reply += `<div><b>${res["context"]}</b><br>${datum}</div>`;
+    console.log(res);
+    for (i in res.data) 
+    {
+        reply += `<div><b>${i}</b>: ${res.data[i]}</div>`;
     }
     addAssistantReply(reply);
   });
