@@ -1,3 +1,4 @@
+import os
 import webbrowser
 import subprocess
 from . import gmail
@@ -8,4 +9,6 @@ class Actions:
         webbrowser.open("https://web.facebook.com")
     def open_explorer(self):
         subprocess.Popen(r'explorer /select')
+    def open_chrome(self):
+        os.system("start chrome")
     
