@@ -1,4 +1,4 @@
 ## Avialable commands
 
-`open youtube'
+``open youtube``
 > Open youtube website with your default browser
