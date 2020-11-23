@@ -1,7 +1,7 @@
 from sys import argv
 import json
 from services.gmail import main
-from services.covid_update import main as covid_update
+from services.covid_update import covid_update_local, covid_update_global
 import requests
 cb_id = int(argv[1])
 if(cb_id==0):
@@ -20,11 +20,20 @@ elif(cb_id==1):
     res_json["data"] = {"IP": req_json_res["ip"]}
     print(json.dumps(res_json))
 elif(cb_id==2):
-    res = covid_update()[0]
+    res = covid_update_local()[0]
     res_json = {"data":{}}
     res_json["data"]["Country"] = res["country"]
     res_json["data"]["Confirmed"] = res["confirmed"]
     res_json["data"]["Recovered"] = res["recovered"]
+    res_json["data"]["Critical"] = res["critical"]
     res_json["data"]["Deaths"] = res["deaths"]
-
+    print(json.dumps(res_json))
+elif(cb_id==3):
+    res = covid_update_global()[0]
+    res_json = {"data":{}}
+    res_json["data"]["Location"] = "Global"
+    res_json["data"]["Confirmed"] = res["confirmed"]
+    res_json["data"]["Recovered"] = res["recovered"]
+    res_json["data"]["Critical"] = res["critical"]
+    res_json["data"]["Deaths"] = res["deaths"]
     print(json.dumps(res_json))
