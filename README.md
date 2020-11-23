@@ -7,6 +7,7 @@
     * API handling for executing commands
     
 ## Available commands
+---
 
 | Command                   |                     Description                         |
 | --------------------------|:-------------------------------------------------------:|
