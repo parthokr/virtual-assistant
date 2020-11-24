@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "backend\\venv\\Scripts\\python.exe"
+    "python.pythonPath": "backend\\venv\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
 }
