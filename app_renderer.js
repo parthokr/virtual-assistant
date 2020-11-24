@@ -39,6 +39,7 @@ const runCallBack = (id) => {
     id,
   ]);
   python.stdout.on("data", (data) => {
+    console.log(data.toString());
     let res = JSON.parse(data.toString());
     let reply = "";
     console.log(res);
