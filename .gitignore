@@ -258,3 +258,4 @@ cython_debug/
 *.pickle
 credentials/
 credentials.json
+backend/services/classroom_test.py
