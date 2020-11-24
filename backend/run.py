@@ -10,11 +10,15 @@ if(__name__=="__main__"):
         print(json.dumps(VoiceToText.return_processed_cmd()))
     elif(len(argv)>1):
         text = ' '.join(list(map(lambda chunk: chunk.lower(), argv[1:])))
-        cmd_runner = CommandRunner(text)
+        try:
+            cmd_runner = CommandRunner(text)
+        except Exception as e:
+            print(e)
         print(json.dumps(
             {
             "assistant_reply": cmd_runner.getAssistantReply(),
             "call_back": cmd_runner.getCallBackId()
             }
             ))
-        cmd_runner.run()
+        if(cmd_runner.getAssistantReply!="not_found"):
+            cmd_runner.run()
