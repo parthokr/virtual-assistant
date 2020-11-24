@@ -49,3 +49,12 @@ elif(cb_id==4):
         res_json["data"][course["name"]] = course["descriptionHeading"]
     res_json = json.dumps(res_json)
     print(res_json)
+elif(cb_id==5):
+    try:
+        res = ClassRoom().announcement_list()
+    except Exception as e:
+        print(e)
+    res_json = {"data":{}}
+    for course in res:
+        res_json["data"][course["name"]] = course["announcement"] if course["announcement"] else "No announcement yet"
+    print(json.dumps(res_json))
