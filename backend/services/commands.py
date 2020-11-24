@@ -27,7 +27,8 @@ class Commands:
                 "covid update global": ["Fetching covid update...", lambda x: None, 3],
                 "covid global update": ["Fetching covid update...", lambda x: None, 3],
 
-                "my class": ["Fetching your classroom info...", lambda x: None, 4]
+                "my class": ["Fetching your classroom info...", lambda x: None, 4],
+                "class update": ["Fetching class updates...", lambda x: None, 5]
 
             }
     def get_commands(self):
