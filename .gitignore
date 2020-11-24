@@ -256,4 +256,5 @@ dmypy.json
 cython_debug/
 
 *.pickle
+credentials/
 credentials.json
