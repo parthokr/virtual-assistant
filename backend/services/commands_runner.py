@@ -7,7 +7,7 @@ class CommandRunner:
         return "not_found" if len(self.command)==0 else self.command[0]
 
     def getCallBackId(self):
-        return self.command[2]
+        return None if len(self.command)==0 else self.command[2]
 
     def run(self):
         if(len(self.command)>0):
