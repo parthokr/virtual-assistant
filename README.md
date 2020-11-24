@@ -14,9 +14,11 @@
 | ``open explorer``         |               Open file explorer                        |
 | ``open chrome``           |      Open chrome if installed on your syste             |
 | ``open youtube``          |      Open youtube with your default browser             |
-| ``open facebook``         |       Open facebook with your default browser            |
+| ``open facebook``         |       Open facebook with your default browser           |
 | ``messages``              |       Get last 5 messages from gmail                    |
 | ``my ip`` or ``ip``       |       Get your public ipv4 address                      |
 | ``covid update``          |       Get latest covid update for your locale           |
 | ``covid update global``   |       Get latest global covid update                    |
+| ``my class``              |       Get your class information from google classroom  |
+| ``class update``          |    Get latest class announcements from google classroom |
 
