@@ -1,6 +1,7 @@
 from sys import argv
 import json
 from services.gmail import main
+from services.classroom import ClassRoom
 from services.covid_update import covid_update_local, covid_update_global
 import requests
 cb_id = int(argv[1])
@@ -37,3 +38,14 @@ elif(cb_id==3):
     res_json["data"]["Critical"] = res["critical"]
     res_json["data"]["Deaths"] = res["deaths"]
     print(json.dumps(res_json))
+elif(cb_id==4):
+    try:
+         res = ClassRoom().class_list()
+    except Exception as e:
+        print(e)
+    res_json = {"data":{}}
+
+    for course in res:
+        res_json["data"][course["name"]] = course["descriptionHeading"]
+    res_json = json.dumps(res_json)
+    print(res_json)
