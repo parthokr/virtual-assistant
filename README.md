@@ -12,7 +12,7 @@
 | Command                   |                     Description                         |
 | --------------------------|:-------------------------------------------------------:|
 | ``open explorer``         |               Open file explorer                        |
-| ``open chrome``           |      Open chrome if installed on your syste             |
+| ``open chrome``           |      Open chrome if installed on your system             |
 | ``open youtube``          |      Open youtube with your default browser             |
 | ``open facebook``         |       Open facebook with your default browser           |
 | ``messages``              |       Get last 5 messages from gmail                    |
