@@ -76,6 +76,15 @@ const addTypingAnimation = () => {
 }
 const runCallBack = (id) => {
   console.log(id);
+  // const getLocation = () => {
+  //     navigator.geolocation.getCurrentPosition((position) => {
+  //       console.log(position.cords.latitude);
+  //       console.log(position.cords.longitude);
+  //     },(error)=>{
+  //       console.log(error);
+  //     });
+  //   }
+  // getLocation();
   addTypingAnimation();
   let python = require("child_process").spawn("./backend/venv/Scripts/python", [
     "./backend/run_callback.py",
