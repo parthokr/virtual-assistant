@@ -1,3 +1,4 @@
+const { makeLinkClickable } = require('./utils/makeLinkClickable');
 const toastr = require("toastr");
 const mic = document.getElementById("mic");
 const fadeIn = (element, duration = 600) => {
@@ -28,10 +29,7 @@ const addNewCommand = (cmd) => {
     commandsCard.appendChild(newCmd);
     commandsCard.scrollTop =  commandsCard.scrollHeight;
 }
-const makeLinkClickable = (text) => {
-  text = text.replace(/(https:\/\/[^\s]+)/g, "<a style='color: #3c00ff' target='_blank' href='$1'>$1</a>");
-  return text;
-}
+
 const addAssistantReply = (cmd) => {
   // check if any typing animated reply found
   cmd = makeLinkClickable(cmd);
