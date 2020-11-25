@@ -1,5 +1,18 @@
 const toastr = require("toastr");
 const mic = document.getElementById("mic");
+const fadeIn = (element, duration = 600) => {
+  element.style.display = '';
+  element.style.opacity = 0;
+  var last = +new Date();
+  var tick = function() {
+    element.style.opacity = +element.style.opacity + (new Date() - last) / duration;
+    last = +new Date();
+    if (+element.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+  tick();
+}
 const addNewCommand = (cmd) => {
     let newCmd = document.createElement("div");
     newCmd.innerHTML = `\
@@ -16,9 +29,19 @@ const addNewCommand = (cmd) => {
     commandsCard.scrollTop =  commandsCard.scrollHeight;
 }
 const addAssistantReply = (cmd) => {
-    let newCmd = document.createElement("div");
-    newCmd.innerHTML = `
-                    <div class="d-flex justify-content-start mb-4">
+  // check if any typing animated reply found
+  let all = document
+    .getElementById("commands")
+    .querySelectorAll(".msg_cotainer");
+  let fetching = all[all.length-2];
+  let typing = all[all.length - 1];
+  if (typing && typing.classList.contains("c")) {
+    fetching.parentNode.remove();
+    typing.parentNode.remove();
+  }
+  let newCmd = document.createElement("div");
+  newCmd.innerHTML = `
+                    <div class="d-flex justify-content-start mb-4" style="display: none;" id="ass_reply">
                         <div class="img_cont_msg">
                             <img src="assets/img/bot.jpg"
                                 class="rounded-circle user_img_msg">
@@ -27,13 +50,33 @@ const addAssistantReply = (cmd) => {
                             ${cmd}
                         </div>
                     </div>`;
-    let commandsCard = document.getElementById("commands");
-    commandsCard.appendChild(newCmd);
-    commandsCard.scrollTop =  commandsCard.scrollHeight;
+  let commandsCard = document.getElementById("commands");
+  commandsCard.appendChild(newCmd);
+  fadeIn(newCmd);
+  commandsCard.scrollTop = commandsCard.scrollHeight;
 }
 
+const addTypingAnimation = () => {
+    let newCmd = document.createElement("div");
+    newCmd.innerHTML = `
+                    <div class="d-flex justify-content-start mb-4">
+                        <div class="img_cont_msg">
+                            <img src="assets/img/bot.jpg"
+                                class="rounded-circle user_img_msg">
+                        </div>
+                        <div class="msg_cotainer c" id="typing">
+                              <span class="circle scaling"></span>
+                              <span class="circle scaling"></span>
+                              <span class="circle scaling"></span>
+                        </div>
+                    </div>`;
+    let commandsCard = document.getElementById("commands");
+    commandsCard.appendChild(newCmd);
+    commandsCard.scrollTop = commandsCard.scrollHeight;
+}
 const runCallBack = (id) => {
   console.log(id);
+  addTypingAnimation();
   let python = require("child_process").spawn("./backend/venv/Scripts/python", [
     "./backend/run_callback.py",
     id,
@@ -69,7 +112,7 @@ mic.addEventListener("click", (event) => {
         let res = JSON.parse(data.toString());
         let doneAudio = new Audio("assets/audio/done.mp3");
         doneAudio.play();
-        if (res["text"] == "not_found") {
+        if (res["assistant_reply"] == "not_found") {
           toastr.warning("Command not found");
         }else{
           addNewCommand(res["text"]);
