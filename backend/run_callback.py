@@ -2,6 +2,7 @@ from sys import argv
 import json
 from services.gmail import main
 from services.classroom import ClassRoom
+from services.weather import Weather
 from services.covid_update import covid_update_local, covid_update_global
 import requests
 cb_id = int(argv[1])
@@ -57,4 +58,9 @@ elif(cb_id==5):
     res_json = {"data":{}}
     for course in res:
         res_json["data"][course["name"]] = course["announcement"] if course["announcement"] else "No announcement yet"
+    print(json.dumps(res_json))
+
+elif(cb_id==6):
+    weather = Weather().getWeather()
+    res_json = {"data":weather}
     print(json.dumps(res_json))
