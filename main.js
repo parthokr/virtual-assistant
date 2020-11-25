@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, remote, dialog } = require("electron");
+const { app, BrowserWindow, ipcMain, remote, dialog, shell } = require("electron");
 const {loadUserData} = require("./utils/userData");
 let mainWindow;
 function createWindow() {
@@ -10,6 +10,10 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
     }
+  });
+  mainWindow.webContents.on('new-window', (e, url) => {
+    e.preventDefault();
+    shell.openExternal(url);
   });
   const pageToload = userData["loggedIn"] ? "app.html" : "index.html";
   mainWindow.loadFile(pageToload);
