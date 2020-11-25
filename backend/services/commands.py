@@ -17,18 +17,22 @@ class Commands:
 
                 "messages": ["Checking messages...", lambda x: None, 0],
 
-                "my ip": ["Fetching your ip...", lambda x: None, 1],
-                "ip": ["Fetching your ip...", lambda x: None, 1],
+                "my ip": ["Getting your ip...", lambda x: None, 1],
+                "ip": ["Getting your ip...", lambda x: None, 1],
 
 
-                "covid update": ["Fetching covid update...", lambda x: None, 2],
-                "covid": ["Fetching covid update...", lambda x: None, 2],
+                "covid update": ["Getting covid update...", lambda x: None, 2],
+                "covid": ["Getting covid update...", lambda x: None, 2],
 
-                "covid update global": ["Fetching covid update...", lambda x: None, 3],
-                "covid global update": ["Fetching covid update...", lambda x: None, 3],
+                "covid update global": ["Getting covid update...", lambda x: None, 3],
+                "covid global update": ["Getting covid update...", lambda x: None, 3],
 
-                "my class": ["Fetching your classroom info...", lambda x: None, 4],
-                "class update": ["Fetching class updates...", lambda x: None, 5]
+                "my class": ["Getting your classroom info...", lambda x: None, 4],
+                "class update": ["Getting class updates...", lambda x: None, 5],
+                "class updates": ["Getting class updates...", lambda x: None, 5],
+
+                "weather": ["Getting your weather info...", lambda x: None, 6]
+
 
             }
     def get_commands(self):
