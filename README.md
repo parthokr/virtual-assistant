@@ -21,4 +21,5 @@
 | ``covid update global``   |       Get latest global covid update                    |
 | ``my class``              |       Get your class information from google classroom  |
 | ``class update``          |    Get latest class announcements from google classroom |
+| ``weather``               |   Get latest weather info for your locale               |
 
