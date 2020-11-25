@@ -14,6 +14,7 @@ class Commands:
                 "open explorer": ["Opening explorer...", Actions.open_explorer, -1],
                 "open facebook": ["Opening facebook...", Actions.open_facebook, -1],
                 "open chrome": ["Opening chrome...", Actions.open_chrome, -1],
+                "open github": ["Opening github...", Actions.open_github, -1],
 
                 "messages": ["Checking messages...", lambda x: None, 0],
 

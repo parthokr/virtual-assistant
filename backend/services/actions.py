@@ -18,4 +18,7 @@ class Actions:
         subprocess.Popen(r'explorer /select')
     def open_chrome(self):
         os.system("start chrome")
+    def open_github(self):
+        webbrowser.open("https://github.com/")
+
     
