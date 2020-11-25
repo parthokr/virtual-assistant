@@ -28,8 +28,13 @@ const addNewCommand = (cmd) => {
     commandsCard.appendChild(newCmd);
     commandsCard.scrollTop =  commandsCard.scrollHeight;
 }
+const makeLinkClickable = (text) => {
+  text = text.replace(/(https:\/\/[^\s]+)/g, "<a style='color: #3c00ff' target='_blank' href='$1'>$1</a>");
+  return text;
+}
 const addAssistantReply = (cmd) => {
   // check if any typing animated reply found
+  cmd = makeLinkClickable(cmd);
   let all = document
     .getElementById("commands")
     .querySelectorAll(".msg_cotainer");
@@ -97,7 +102,7 @@ const runCallBack = (id) => {
     console.log(res);
     for (i in res.data) 
     {
-        reply += `<div><b>${i}</b>: ${res.data[i]}</div>`;
+        reply += `<div><b>${i}</b>: ${res.data[i]} </div>`;
     }
     addAssistantReply(reply);
   });
