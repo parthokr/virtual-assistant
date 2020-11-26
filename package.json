@@ -13,6 +13,7 @@
   "dependencies": {
     "bootstrap": "^4.5.3",
     "electron": "^11.0.1",
+    "socket.io-client": "^3.0.3",
     "toastr": "^2.1.4",
     "validator": "^13.1.17"
   }
