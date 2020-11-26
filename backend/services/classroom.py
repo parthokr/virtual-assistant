@@ -21,8 +21,8 @@ class ClassRoom:
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
-        if os.path.exists(getcwd()+'\\backend\\services\\token\\token2.pickle'):
-            with open(getcwd()+'\\backend\\services\\token\\token2.pickle', 'rb') as token:
+        if os.path.exists(getcwd()+'\\services\\token\\token2.pickle'):
+            with open(getcwd()+'\\services\\token\\token2.pickle', 'rb') as token:
                 creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
@@ -30,10 +30,10 @@ class ClassRoom:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    getcwd()+'\\backend\\services\\credentials\\credentials2.json', self.SCOPES)
+                    getcwd()+'\\services\\credentials\\credentials2.json', self.SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open(getcwd()+'\\backend\\services\\token\\token2.pickle', 'wb') as token:
+            with open(getcwd()+'\\services\\token\\token2.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
         service = build('classroom', 'v1', credentials=creds)
@@ -56,8 +56,8 @@ class ClassRoom:
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
-        if os.path.exists(getcwd()+'\\backend\\services\\token\\token2.pickle'):
-            with open(getcwd()+'\\backend\\services\\token\\token2.pickle', 'rb') as token:
+        if os.path.exists(getcwd()+'\\services\\token\\token2.pickle'):
+            with open(getcwd()+'\\services\\token\\token2.pickle', 'rb') as token:
                 creds = pickle.load(token)
         # If there are no (valid) credentials available, let the user log in.
         if not creds or not creds.valid:
@@ -65,10 +65,10 @@ class ClassRoom:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    getcwd()+'\\backend\\services\\credentials\\credentials2.json', self.SCOPES)
+                    getcwd()+'\\services\\credentials\\credentials2.json', self.SCOPES)
                 creds = flow.run_local_server(port=0)
             # Save the credentials for the next run
-            with open(getcwd()+'\\backend\\services\\token\\token2.pickle', 'wb') as token:
+            with open(getcwd()+'\\services\\token\\token2.pickle', 'wb') as token:
                 pickle.dump(creds, token)
 
         service = build('classroom', 'v1', credentials=creds)
