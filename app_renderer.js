@@ -1,4 +1,3 @@
-const { makeLinkClickable } = require('./utils/makeLinkClickable');
 const toastr = require("toastr");
 const mic = document.getElementById("mic");
 const fadeIn = (element, duration = 600) => {
@@ -32,7 +31,7 @@ const addNewCommand = (cmd) => {
 
 const addAssistantReply = (cmd) => {
   // check if any typing animated reply found
-  cmd = makeLinkClickable(cmd);
+  // cmd = makeLinkClickable(cmd);
   let all = document
     .getElementById("commands")
     .querySelectorAll(".msg_cotainer");
@@ -79,31 +78,34 @@ const addTypingAnimation = () => {
 }
 const runCallBack = (id) => {
   console.log(id);
-  // const getLocation = () => {
-  //     navigator.geolocation.getCurrentPosition((position) => {
-  //       console.log(position.cords.latitude);
-  //       console.log(position.cords.longitude);
-  //     },(error)=>{
-  //       console.log(error);
-  //     });
-  //   }
-  // getLocation();
   addTypingAnimation();
-  let python = require("child_process").spawn("./backend/venv/Scripts/python", [
-    "./backend/run_callback.py",
-    id,
-  ]);
-  python.stdout.on("data", (data) => {
-    console.log(data.toString());
-    let res = JSON.parse(data.toString());
-    let reply = "";
-    console.log(res);
-    for (i in res.data) 
-    {
-        reply += `<div><b>${i}</b>: ${res.data[i]} </div>`;
-    }
-    addAssistantReply(reply);
+  fetch(`http://127.0.0.1:1234/callback?id=${id}`)
+  .then(res => res.json())
+  .then(res => {
+      let reply = "";
+      console.log(res);
+      for (i in res.data)
+      {
+          reply += `<div><b>${i}</b>: ${res.data[i]} </div>`;
+      }
+      addAssistantReply(reply);
   });
+
+  // let python = require("child_process").spawn("./backend/venv/Scripts/python", [
+  //   "./backend/run_callback.py",
+  //   id,
+  // ]);
+  // python.stdout.on("data", (data) => {
+  //   console.log(data.toString());
+  //   let res = JSON.parse(data.toString());
+  //   let reply = "";
+  //   console.log(res);
+  //   for (i in res.data)
+  //   {
+  //       reply += `<div><b>${i}</b>: ${res.data[i]} </div>`;
+  //   }
+  //   addAssistantReply(reply);
+  // });
 };
 
 mic.addEventListener("click", (event) => {
@@ -116,59 +118,99 @@ mic.addEventListener("click", (event) => {
       _mic.classList.remove("fa-microphone");
       _mic.classList.add("fa-stop-circle");
       document.querySelector("input[name='command']").placeholder="Listening...";
-      var python = require("child_process").spawn("./backend/venv/Scripts/python", [
-        "./backend/run.py",
-      ]);
-      python.stdout.on("data", function (data) {
-        console.log("Python response: ", data.toString());
-        let res = JSON.parse(data.toString());
-        let doneAudio = new Audio("assets/audio/done.mp3");
-        doneAudio.play();
-        if (res["assistant_reply"] == "not_found") {
-          toastr.warning("Command not found");
-        }else{
-          addNewCommand(res["text"]);
-          addAssistantReply(res["assistant_reply"]);
-          if(res["call_back"]>-1)
+      fetch("http://127.0.0.1:1234/listen")
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          if(res["assistant_reply"]!="not_found")
           {
-            runCallBack(res["call_back"]);
+            addNewCommand(res["text"]);
+            addAssistantReply(res["assistant_reply"]);
+            if(res["call_back"]>-1)
+            {
+              runCallBack(res["call_back"]);
+            }
+            _mic.classList.remove("fa-stop-circle");
+            _mic.classList.add("fa-microphone");
+            document.querySelector("input[name='command']").placeholder =
+              "Type your command...";
+          }else{
+            _mic.classList.remove("fa-stop-circle");
+            _mic.classList.add("fa-microphone");
+            document.querySelector("input[name='command']").placeholder =
+              "Type your command...";
+            toastr.warning("Command not found");
           }
-        }
-        const _mic = document.getElementById("_mic");
-        if (_mic.classList.contains("fa-stop-circle")) {
-          _mic.classList.remove("fa-stop-circle");
-          _mic.classList.add("fa-microphone");
-          document.querySelector("input[name='command']").placeholder =
-            "Type your command...";
-        }
-      });
+        });
+      // var python = require("child_process").spawn(
+      //   "./backend/venv/Scripts/python",
+      //   ["./backend/run.py"]
+      // );
+      // python.stdout.on("data", function (data) {
+      //   console.log("Python response: ", data.toString());
+      //   let res = JSON.parse(data.toString());
+      //   let doneAudio = new Audio("assets/audio/done.mp3");
+      //   doneAudio.play();
+      //   if (res["assistant_reply"] == "not_found") {
+      //     toastr.warning("Command not found");
+      //   }else{
+      //     addNewCommand(res["text"]);
+      //     addAssistantReply(res["assistant_reply"]);
+      //     if(res["call_back"]>-1)
+      //     {
+      //       runCallBack(res["call_back"]);
+      //     }
+      //   }
+      //   const _mic = document.getElementById("_mic");
+      //   if (_mic.classList.contains("fa-stop-circle")) {
+      //     _mic.classList.remove("fa-stop-circle");
+      //     _mic.classList.add("fa-microphone");
+      //     document.querySelector("input[name='command']").placeholder =
+      //       "Type your command...";
+      //   }
+      // });
     }
     else{
       event.preventDefault();
     }
 });
 const textCommand = (cmd) => {
-  console.log(cmd)
-    addNewCommand(cmd.join(" "));
-    var python = require("child_process").spawn(
-      "./backend/venv/Scripts/python",
-      ["./backend/run.py",...cmd]
-    );
-    python.stdout.on("data", function (data) {
-      console.log("Python response: ", data.toString());
-      let res = JSON.parse(data.toString());
-      let doneAudio = new Audio("assets/audio/done.mp3");
-      doneAudio.play();
-      if (res["assistant_reply"] == "not_found") {
-        toastr.warning("Command not found");
-      } else {
-        addAssistantReply(res["assistant_reply"]);
-        if (res["call_back"] > -1) {
-          console.log("callback found!");
-          runCallBack(res["call_back"]);
-        }
-      }
-    });
+    console.log(cmd);
+    let readable_cmd = cmd.join(" ");
+    addNewCommand(readable_cmd);
+    console.log(encodeURI(readable_cmd));
+    fetch(`http://127.0.0.1:1234/execute?command=${encodeURI(readable_cmd)}`)
+      .then((res) => res.json())
+      .then((res) => {
+          if (res["assistant_reply"] == "not_found") {
+            toastr.warning("Command not found");
+          } else {
+            addAssistantReply(res["assistant_reply"]);
+            if (res["call_back"] > -1) {
+              console.log("callback found!");
+              runCallBack(res["call_back"]);
+            }
+          }
+      });
+    // var python = require("child_process").spawn(
+    //   "./backend/venv/Scripts/python",
+    //   ["./backend/run.py",...cmd]
+    // );
+    // python.stdout.on("data", function (data) {
+    //   console.log("Python response: ", data.toString());
+    //   let res = JSON.parse(data.toString());
+    //   let doneAudio = new Audio("assets/audio/done.mp3");
+    //   doneAudio.play();
+    //   if (res["assistant_reply"] == "not_found") {
+    //     toastr.warning("Command not found");
+    //   } else {
+    //     addAssistantReply(res["assistant_reply"]);
+    //     if (res["call_back"] > -1) {
+    //       console.log("callback found!");
+    //       runCallBack(res["call_back"]);
+    //     }
+    //   }
+    // });
 }
 const command_input = document.querySelector('input[name="command"]');
 command_input.addEventListener("keypress", (event) => {
