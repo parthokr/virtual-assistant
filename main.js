@@ -6,7 +6,7 @@ function createWindow() {
     console.log(userData);
     mainWindow = new BrowserWindow({
     width: 600,
-    height: 600,
+    height: 700,
     webPreferences: {
       nodeIntegration: true,
     }
@@ -52,8 +52,8 @@ ipcMain.on("asynchronous-message", (event, message) => {
         const res = dialog.showMessageBox(null, {title: "Success", message: "Logged in successfully"});
         mainWindow.loadFile("app.html");
     } else if(message === "wrongPassword") {
-         const res = dialog.showMessageBox(null, {title: "Error", message: "Incorrent password"});
+         const res = dialog.showMessageBox(null, {title: "Error", message: "Incorrect password"});
     } else if(message === "wrongUsername") {
-        const res = dialog.showMessageBox(null, {title: "Error", message: "Incorrent username"});
+        const res = dialog.showMessageBox(null, {title: "Error", message: "Incorrect username"});
     }
 });
