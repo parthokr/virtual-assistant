@@ -7,7 +7,7 @@ from run_callback import CallBack
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 s.bind(('127.0.0.1', 1234))
 s.listen(5)
-
+trigger = VoiceToText()
 while True:
     clientsocket = None
     try:
