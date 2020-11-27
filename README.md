@@ -4,7 +4,7 @@
 ### This repo contains simple virtual assistant app built with
 * Node.js for frontend and few api calling
 * Python for backend 
-    * Speech recognition and running commands background through child process of node.js
+    * Speech recognition and running commands background through client server socket
     * API handling for executing commands
 ---
 ## Available commands
