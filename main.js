@@ -1,23 +1,38 @@
-const { app, BrowserWindow, ipcMain, remote, dialog, shell } = require("electron");
-const {loadUserData} = require("./utils/userData");
+const { app, BrowserWindow, ipcMain, remote, dialog, shell, net } = require("electron");
+const { loadUserData } = require("./utils/userData");
+const axios = require('axios').default;
 let mainWindow;
 function createWindow() {
-    const userData = loadUserData();
-    console.log(userData);
-    mainWindow = new BrowserWindow({
+  let python = require("child_process").spawn("./backend/venv/Scripts/python", [
+    "./backend/server.py"
+  ]);
+  python.stdout.on("data", (data) => {
+    console.log(data.toString());
+  });
+  const userData = loadUserData();
+  console.log(userData);
+  mainWindow = new BrowserWindow({
     width: 600,
     height: 700,
     webPreferences: {
       nodeIntegration: true,
-    }
+    },
   });
-  mainWindow.webContents.on('new-window', (e, url) => {
+  mainWindow.webContents.on("new-window", (e, url) => {
     e.preventDefault();
     shell.openExternal(url);
   });
+  mainWindow.on("close", () => {
+    axios
+      .get("http://127.0.0.1:1234/exit")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+  });
   const pageToload = userData["loggedIn"] ? "app.html" : "index.html";
   mainWindow.loadFile(pageToload);
-//   mainWindow.webContents.openDevTools();
+  //   mainWindow.webContents.openDevTools();
 }
 
 app.whenReady().then(createWindow);
