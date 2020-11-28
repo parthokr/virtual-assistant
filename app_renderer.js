@@ -1,5 +1,6 @@
 const toastr = require("toastr");
 const mic = document.getElementById("mic");
+const {loadUserData} = require("./utils/userData");
 const fadeIn = (element, duration = 600) => {
   element.style.display = '';
   element.style.opacity = 0;
@@ -57,7 +58,41 @@ const addAssistantReply = (cmd) => {
   fadeIn(newCmd);
   commandsCard.scrollTop = commandsCard.scrollHeight;
 }
-
+const loadPreviousCmd = () => {
+  let userData = loadUserData();
+  let id = userData["id"];
+  fetch(`http:127.0.0.1:3000/load_cmd_history?id=${id}`, { method: "GET" })
+    .then(res => res.json())
+    .then(res => {
+      for (row of res) {
+        addNewCommand(row["cmd"]);
+        addAssistantReply(row["assistant_reply"]);
+      }
+    })
+};
+loadPreviousCmd();
+const persistCommand = (cmd, ass_reply) => {
+  let userData = loadUserData();
+  let id = userData["id"];
+  // console.log(userData);
+  fetch(`http://127.0.0.1:3000/save_command`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors, *cors, same-origin
+        cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: "same-origin", // include, *same-origin, omit
+        headers: {
+              "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: "follow", // manual, *follow, error
+        referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify({ id, cmd, ass_reply }), // body data type must match "Content-Type" header
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+    });
+}
 const addTypingAnimation = () => {
     let newCmd = document.createElement("div");
     newCmd.innerHTML = `
@@ -76,7 +111,7 @@ const addTypingAnimation = () => {
     commandsCard.appendChild(newCmd);
     commandsCard.scrollTop = commandsCard.scrollHeight;
 }
-const runCallBack = (id) => {
+const runCallBack = (id, cmd) => {
   console.log(id);
   addTypingAnimation();
   fetch(`http://127.0.0.1:1234/callback?id=${id}`)
@@ -88,7 +123,8 @@ const runCallBack = (id) => {
       {
           reply += `<div><b>${i}</b>: ${res.data[i]} </div>`;
       }
-      addAssistantReply(reply);
+    addAssistantReply(reply);
+    persistCommand(cmd, reply);
   });
 
   // let python = require("child_process").spawn("./backend/venv/Scripts/python", [
@@ -128,7 +164,9 @@ mic.addEventListener("click", (event) => {
             addAssistantReply(res["assistant_reply"]);
             if(res["call_back"]>-1)
             {
-              runCallBack(res["call_back"]);
+              runCallBack(res["call_back"], res["assistant_reply"]);
+            } else {
+              persistCommand(res["text"], res["assistant_reply"]);
             }
             _mic.classList.remove("fa-stop-circle");
             _mic.classList.add("fa-microphone");
@@ -188,7 +226,9 @@ const textCommand = (cmd) => {
             addAssistantReply(res["assistant_reply"]);
             if (res["call_back"] > -1) {
               console.log("callback found!");
-              runCallBack(res["call_back"]);
+              runCallBack(res["call_back"], readable_cmd); 
+            } else {
+              persistCommand(readable_cmd, res["assistant_reply"]);
             }
           }
       });
