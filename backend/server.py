@@ -78,6 +78,13 @@ while True:
             +"Content-Type: application/json; Charset=UTF-8\n"
             +"\n" # Important!
             +"{}".format(json_text), "utf-8"))
+        elif (path == '/exit'):
+            json_text = json.dumps({"exit": True})
+            clientsocket.send(bytes("HTTP/1.1 200 OK\n" 
+            +"Content-Type: application/json; Charset=UTF-8\n"
+            +"\n" # Important!
+            +"{}".format(json_text), "utf-8"))
+            break
         else:
             error_json_res = json.dumps({"error": "invalid route"})
             clientsocket.send(bytes("HTTP/1.1 200 OK\n" 
