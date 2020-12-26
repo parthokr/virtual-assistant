@@ -21,6 +21,7 @@ class ClassRoom:
         # The file token.pickle stores the user's access and refresh tokens, and is
         # created automatically when the authorization flow completes for the first
         # time.
+        # add \\backend in production
         if os.path.exists(getcwd()+'\\services\\token\\token2.pickle'):
             with open(getcwd()+'\\services\\token\\token2.pickle', 'rb') as token:
                 creds = pickle.load(token)
