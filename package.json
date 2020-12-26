@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "electron": "^11.0.1",
     "socket.io-client": "^3.0.3",
