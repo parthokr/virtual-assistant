@@ -21,7 +21,7 @@ class ClassRoom:
         # created automatically when the authorization flow completes for the first
         # time.
 
-        # add \\backend in production
+        # remove \\backend in experiment
         if os.path.exists(getcwd()+'\\backend\\services\\token\\token2.pickle'):
             with open(getcwd()+'\\backend\\services\\token\\token2.pickle', 'rb') as token:
                 creds = pickle.load(token)
