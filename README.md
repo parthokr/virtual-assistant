@@ -22,6 +22,9 @@
 
     `npm start`
 
+* Bingo! You have successfully set this app up!
+* Start exploring
+
 ## Available commands
 
 | Command                   |                     Description                         |
