@@ -11,6 +11,7 @@
 > Make sure you have [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/) installed onto your system
 * Open up terminal at your desired directory
 * Enter the following commands sequentially and hit enter
+
     `git clone -b production https://github.com/ParthoKR/virtual-assistant.git` 
 
     `cd virtual-assistant`
@@ -20,7 +21,7 @@
     `npm install`
 
     `npm start`
-    
+
 ## Available commands
 
 | Command                   |                     Description                         |
