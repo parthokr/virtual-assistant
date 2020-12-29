@@ -7,6 +7,15 @@
     * Speech recognition and running commands background through client server socket
     * API handling for executing commands
 ---
+## How to get this app up and running?
+> Make sure you have [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/) installed onto your system
+* Open up terminal at your desired directory
+* Enter the following commands sequentially and hit enter
+    `git clone -b production https://github.com/ParthoKR/virtual-assistant.git`
+    `cd virtual-assistant`
+    `pip install -r backend/requirements.txt`
+    `npm install`
+    `npm start`
 ## Available commands
 
 | Command                   |                     Description                         |
