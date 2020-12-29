@@ -32,7 +32,9 @@ class Commands:
                 "class update": ["Getting class updates...", lambda x: None, 5],
                 "class updates": ["Getting class updates...", lambda x: None, 5],
 
-                "weather": ["Getting your weather info...", lambda x: None, 6]
+                "weather": ["Getting your weather info...", lambda x: None, 6],
+                "weather update": ["Getting your weather info...", lambda x: None, 6],
+
 
 
             }
