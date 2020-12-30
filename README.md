@@ -1,5 +1,3 @@
-# Virtual-Assistant
-![Virtual-Assistant](https://lh3.googleusercontent.com/uZWelzVD7fkFW5Fsac9YsWy6OFmpeXaawNvqsbPyf7A-geW8f2FEIjR_OhvVasHy1d8KXvbzsq-FLbatv6aqTsLqpIP7EmBbpHB5X99m31B55nLb0q5YvdCaaGv1PHUvZ3650mFiDi4=w2400?source=screenshot.guru)
 ![Virtual-Assistant](https://github.com/ParthoKR/virtual-assistant/raw/main/virtual-assistant.gif)
 ---
 ### This repo contains simple virtual assistant app built with
@@ -41,5 +39,6 @@
 | ``covid update global``   |       Get latest global covid update                    |
 | ``my class``              |       Get your class information from google classroom  |
 | ``class update``          |    Get latest class announcements from google classroom |
-| ``weather``               |   Get latest weather info for your locale               |
+| ``weather``               |   Get latest weather info for your locale               | 
+|``weather update``         |   Get latest weather info for your locale               |
 
