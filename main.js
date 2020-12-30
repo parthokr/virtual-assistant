@@ -3,8 +3,9 @@ const { loadUserData } = require("./utils/userData");
 const axios = require('axios').default;
 let mainWindow;
 function createWindow() {
-  let python = require("child_process").spawn("./backend/venv/Scripts/python", [
-    "./backend/server.py"
+  // prepend "./backend/venv/Scripts/" in development 
+  let python = require("child_process").spawn("python", [
+    "./backend/server.py",
   ]);
   python.stdout.on("data", (data) => {
     console.log(data.toString());
