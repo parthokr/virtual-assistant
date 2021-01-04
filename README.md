@@ -7,7 +7,8 @@
     * API handling for executing commands
 ---
 ## How to get this app up and running?
-> Make sure you have [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/) installed onto your system
+> Make sure you have [Python](https://www.python.org/downloads/) and [Node.js](https://nodejs.org/en/download/) installed onto your system.
+
 > You will be required to run a web server to handle user authentication and command management. To get started with webs erver follow [this](https://github.com/ParthoKR/virtual-assistant-server-side) repository
 ---
 * Open up terminal at your desired directory
