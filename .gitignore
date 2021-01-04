@@ -261,3 +261,4 @@ credentials.json
 backend/services/classroom_test.py
 
 packager.js
+package-lock.json
